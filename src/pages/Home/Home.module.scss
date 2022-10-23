@@ -9,3 +9,14 @@
     display: none;
   }
 }
+
+.empty {
+  min-height: 400px;
+
+  div {
+    padding: 150px 0 150px 0;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 500;
+  }
+}

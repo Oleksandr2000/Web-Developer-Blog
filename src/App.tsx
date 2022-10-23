@@ -5,6 +5,7 @@ import { authRoutes, publicRoutes } from './routes';
 import { Route, Routes } from 'react-router-dom';
 import { useAppDispatch } from './hooks/useContextHooks';
 import { fetchAuth } from './redux/slice/UserSlice';
+import Hamburger from './components/Hamburger';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -16,6 +17,7 @@ function App() {
   return (
     <>
       <Header />
+      <Hamburger />
       <Container maxWidth="lg">
         <Routes>
           {authRoutes.map((route: any, i: number) => (

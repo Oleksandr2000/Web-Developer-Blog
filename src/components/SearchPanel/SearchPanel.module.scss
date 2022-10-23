@@ -1,0 +1,64 @@
+.root {
+  margin: 30px 0px;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btns {
+  width: 35%;
+  justify-content: space-between;
+}
+.btn {
+  padding: 5px 10px !important;
+  margin-right: 10px !important;
+}
+
+.input {
+  width: 55%;
+  margin: 15px 0px;
+}
+
+.user {
+  width: 10%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media screen and (max-width: 992px) {
+  .btns {
+    width: 46%;
+    justify-content: space-between;
+  }
+
+  .input {
+    width: 44%;
+    margin: 15px 0px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .btns {
+    width: 85%;
+  }
+
+  .input {
+    display: none;
+  }
+
+  .user {
+    width: 15%;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .btns {
+    width: 100%;
+  }
+
+  .user {
+    display: none;
+  }
+}

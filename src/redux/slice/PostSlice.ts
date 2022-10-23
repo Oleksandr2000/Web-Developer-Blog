@@ -13,8 +13,10 @@ export const updatePost = createAsyncThunk<any, any>('posts/updatePost', async (
 });
 
 export const fetchPosts = createAsyncThunk<any, any>('posts/fetchPosts', async (params) => {
-  const { tag } = params;
-  const { data } = await axios.get(`/posts/?tag=${tag}`);
+  const { tag, sort, user, searchString, page, limit } = params;
+  const { data } = await axios.get(
+    `/posts/?tag=${tag}&sort=${sort}&user=${user}&searchString=${searchString}&page=${page}&limit=${limit}`,
+  );
   return data;
 });
 
@@ -35,7 +37,12 @@ export const fetchTags = createAsyncThunk('posts/fetchTags', async () => {
 });
 
 interface PostState {
-  items: Posts[];
+  items: {
+    data: Posts[];
+    count: number;
+  };
+  limit: number;
+  page: number;
   status: string | null;
   removeStatus: boolean;
   post: {
@@ -47,6 +54,9 @@ interface PostState {
     statusPOST: string | null;
   };
   activeTag: string;
+  sort: string;
+  user: string;
+  searchString: string;
   tags: {
     data: string[];
     status: string | null;
@@ -54,7 +64,12 @@ interface PostState {
 }
 
 const initialState: PostState = {
-  items: [],
+  items: {
+    data: [],
+    count: 0,
+  },
+  limit: 3,
+  page: 1,
   status: null,
   removeStatus: false,
   post: {
@@ -77,6 +92,9 @@ const initialState: PostState = {
     statusPOST: null,
   },
   activeTag: '',
+  sort: 'viewsCount',
+  user: '',
+  searchString: '',
   tags: {
     data: [],
     status: null,
@@ -91,7 +109,26 @@ const postSlice = createSlice({
       state.post.statusPOST = null;
     },
     setActiveTag: (state, action) => {
-      state.activeTag = action.payload;
+      if (state.activeTag === action.payload) {
+        state.activeTag = '';
+      } else {
+        state.activeTag = action.payload;
+      }
+    },
+    setSearchString: (state, action) => {
+      state.searchString = action.payload;
+    },
+    setSort: (state, action) => {
+      state.sort = action.payload;
+    },
+    setUser: (state, action) => {
+      state.user = action.payload;
+    },
+    resetFilter: (state) => {
+      state.user = '';
+    },
+    setPage: (state, action) => {
+      state.page = action.payload;
     },
   },
   extraReducers(builder) {
@@ -119,7 +156,8 @@ const postSlice = createSlice({
       })
       .addCase(fetchPosts.fulfilled, (state, action) => {
         state.status = 'loaded';
-        state.items = action.payload;
+        state.items.data = action.payload.posts;
+        state.items.count = action.payload.count;
       })
       .addCase(fetchPosts.rejected, (state) => {
         state.status = 'error';
@@ -157,6 +195,14 @@ const postSlice = createSlice({
   },
 });
 
-export const { clearStatusPost, setActiveTag } = postSlice.actions;
+export const {
+  clearStatusPost,
+  setActiveTag,
+  setSort,
+  setSearchString,
+  setUser,
+  resetFilter,
+  setPage,
+} = postSlice.actions;
 
 export default postSlice.reducer;

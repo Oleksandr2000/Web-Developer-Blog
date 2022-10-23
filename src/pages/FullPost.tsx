@@ -31,7 +31,7 @@ export const FullPost = () => {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <img src="/duoloader.svg" alt="loadding" />;
+        <img src="/duoloader.svg" alt="loadding" />
       </div>
     );
   }
@@ -47,7 +47,7 @@ export const FullPost = () => {
             'https://res.cloudinary.com/practicaldev/image/fetch/s--uigxYVRB--/c_fill,f_auto,fl_progressive,h_50,q_auto,w_50/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/187971/a5359a24-b652-46be-8898-2c5df32aa6e0.png',
           fullName: post.items.doc.user.fullName,
         }}
-        createdAt={post.items.doc.createdAt}
+        createdAt={post.items.doc.createdAt.substring(0, 10)}
         viewsCount={post.items.doc.viewsCount}
         commentsCount={3}
         tags={post.items.doc.tags}

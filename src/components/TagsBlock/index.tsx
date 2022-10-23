@@ -8,9 +8,11 @@ import TagIcon from '@mui/icons-material/Tag';
 import ListItemText from '@mui/material/ListItemText';
 import Skeleton from '@mui/material/Skeleton';
 
-import { SideBlock } from './SideBlock';
-import { useAppDispatch } from '../hooks/useContextHooks';
-import { setActiveTag } from '../redux/slice/PostSlice';
+import { SideBlock } from '../SideBlock';
+import { useAppDispatch, useAppSelector } from '../../hooks/useContextHooks';
+import { setActiveTag } from '../../redux/slice/PostSlice';
+
+import styles from './TagsBlock.module.scss';
 
 interface TagsBlockProps {
   items: any;
@@ -18,6 +20,10 @@ interface TagsBlockProps {
 }
 
 export const TagsBlock: React.FC<TagsBlockProps> = ({ items, isLoading = true }) => {
+  const { activeTag } = useAppSelector((store) => store.posts);
+
+  console.log(activeTag);
+
   const dispatch = useAppDispatch();
 
   const handlerTag = (tag: string) => {
@@ -27,8 +33,9 @@ export const TagsBlock: React.FC<TagsBlockProps> = ({ items, isLoading = true })
   return (
     <SideBlock title="Тэги">
       <List>
-        {(isLoading ? [...Array(5)] : items).map((name: any, i: number) => (
+        {(isLoading ? [...Array(5)] : items).map((name: string, i: number) => (
           <div
+            className={activeTag === name ? styles.active : styles.item}
             key={i}
             style={{ textDecoration: 'none', color: 'black' }}
             onClick={() => handlerTag(name)}>

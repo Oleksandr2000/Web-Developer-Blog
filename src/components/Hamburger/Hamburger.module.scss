@@ -1,0 +1,43 @@
+.root {
+  background-color: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  margin: 0px 0px 30px 0px !important;
+  border-top: none !important;
+  @media only screen and (min-width: 769px) {
+    display: none;
+  }
+}
+
+.summary {
+  min-height: 40px !important;
+  font-size: 18px;
+  font-weight: 700;
+  color: #000;
+}
+
+.details {
+  padding: 0 !important;
+}
+
+.list {
+  padding: 0 0 20px 0;
+}
+
+.listItem {
+  a {
+    text-decoration: none !important;
+    color: #000;
+    span {
+      font-size: 18px !important;
+      font-weight: 500 !important;
+    }
+  }
+}
+
+.logout {
+  span {
+    color: rgb(145, 15, 15);
+    font-size: 18px !important;
+    font-weight: 500 !important;
+  }
+}
