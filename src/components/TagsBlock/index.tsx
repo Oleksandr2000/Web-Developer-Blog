@@ -10,7 +10,7 @@ import Skeleton from '@mui/material/Skeleton';
 
 import { SideBlock } from '../SideBlock';
 import { useAppDispatch, useAppSelector } from '../../hooks/useContextHooks';
-import { setActiveTag } from '../../redux/slice/PostSlice';
+import { setActiveTag, setPage } from '../../redux/slice/PostSlice';
 
 import styles from './TagsBlock.module.scss';
 
@@ -27,6 +27,7 @@ export const TagsBlock: React.FC<TagsBlockProps> = ({ items, isLoading = true })
   const dispatch = useAppDispatch();
 
   const handlerTag = (tag: string) => {
+    dispatch(setPage(1));
     dispatch(setActiveTag(tag));
   };
 

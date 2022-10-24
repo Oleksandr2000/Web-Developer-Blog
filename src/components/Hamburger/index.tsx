@@ -87,9 +87,10 @@ const Hamburger = () => {
           <ListItem alignItems="flex-start" className={styles.listItem}>
             <TextField
               id="outlined-basic"
-              label="Outlined"
+              label="Search"
               variant="outlined"
               size="small"
+              className={styles.input}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">

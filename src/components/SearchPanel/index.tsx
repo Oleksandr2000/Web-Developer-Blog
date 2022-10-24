@@ -15,6 +15,7 @@ import {
 import BasicSelect from '../Select';
 
 const SearchPanel = () => {
+  const { data } = useAppSelector((store) => store.user);
   const { activeTag, searchString, user, sort, page, limit } = useAppSelector(
     (store) => store.posts,
   );
@@ -32,10 +33,12 @@ const SearchPanel = () => {
   };
 
   const showMyPost = () => {
+    dispatch(setPage(1));
     dispatch(setUser(userData._id));
   };
 
   const resetFilters = () => {
+    dispatch(setPage(1));
     dispatch(resetFilter());
   };
 
@@ -50,13 +53,15 @@ const SearchPanel = () => {
             onClick={resetFilters}>
             All
           </Button>
-          <Button
-            variant={user ? 'contained' : 'outlined'}
-            size="medium"
-            className={styles.btn}
-            onClick={showMyPost}>
-            My Posts
-          </Button>
+          {data.token && (
+            <Button
+              variant={user ? 'contained' : 'outlined'}
+              size="medium"
+              className={styles.btn}
+              onClick={showMyPost}>
+              My Posts
+            </Button>
+          )}
           <BasicSelect
             items={[
               { value: 'viewsCount', name: 'Popular' },
@@ -67,7 +72,7 @@ const SearchPanel = () => {
         <div className={styles.input}>
           <TextField
             id="outlined-basic"
-            label="Outlined"
+            label="Search"
             variant="outlined"
             size="small"
             InputProps={{

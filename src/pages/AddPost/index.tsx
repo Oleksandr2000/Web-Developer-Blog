@@ -94,7 +94,7 @@ export const AddPost = () => {
   const options: any = React.useMemo(
     () => ({
       spellChecker: false,
-      maxHeight: '100px',
+      maxHeight: '350px',
       autofocus: true,
       placeholder: 'Введите текст...',
       status: false,
